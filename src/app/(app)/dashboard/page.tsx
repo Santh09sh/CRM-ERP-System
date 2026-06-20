@@ -466,7 +466,7 @@ function LiveAIInsightWidget() {
                   className="text-[10px] px-2 py-0.5 rounded-full font-bold tracking-wide"
                   style={{ background: `${accentColor}18`, color: accentColor, border: `1px solid ${accentColor}30` }}
                 >
-                  {isAI ? "✦ GEMINI" : loading ? "…" : "LIVE"}
+                  {isAI ? "✦ AI" : loading ? "…" : "LIVE"}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -577,7 +577,7 @@ function LiveAIInsightWidget() {
                       className="text-[11px] px-2.5 py-1 rounded-full font-bold tracking-wide"
                       style={{ background: `${accentColor}18`, color: accentColor, border: `1px solid ${accentColor}30` }}
                     >
-                      {isAI ? "✦ GEMINI" : "LIVE"}
+                      {isAI ? "✦ AI" : "LIVE"}
                     </span>
                   </div>
                   <button onClick={() => setExpanded(false)} className="text-[#666] hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/5">
