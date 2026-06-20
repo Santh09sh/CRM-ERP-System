@@ -482,12 +482,20 @@ export default function InvoicesPage() {
         const data = await getInvoices();
         if (data?.length) {
           // Map DB response to UI format
-          const mapped = data.map((inv: any) => ({
-            ...inv,
-            company_name: inv.company?.name || inv.company_name || "Unknown Company",
-            contact_name: inv.contact ? `${inv.contact.first_name} ${inv.contact.last_name}`.trim() : inv.contact_name || "Unknown Contact",
-            items: inv.invoice_items || [],
-          }));
+          const mapped = data.map((inv: any) => {
+            let mappedVenture = inv.venture;
+            if (!mappedVenture || mappedVenture === "core") {
+              mappedVenture = inv.deal?.venture || inv.company?.venture || "saasum";
+            }
+            
+            return {
+              ...inv,
+              venture: mappedVenture,
+              company_name: inv.company?.name || inv.company_name || "Unknown Company",
+              contact_name: inv.contact ? `${inv.contact.first_name} ${inv.contact.last_name}`.trim() : inv.contact_name || "Unknown Contact",
+              items: inv.invoice_items || [],
+            };
+          });
           setInvoices(mapped);
         }
       } catch (err) {

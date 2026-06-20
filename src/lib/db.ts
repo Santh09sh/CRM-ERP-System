@@ -241,7 +241,7 @@ export async function updateLead(id: string, updates: any) {
 export async function getInvoices() {
   const { data, error } = await supabase
     .from("invoices")
-    .select("*, invoice_items(*), company:companies(*), contact:contacts(*)")
+    .select("*, invoice_items(*), company:companies(*), contact:contacts(*), deal:deals(venture)")
     .order("created_at", { ascending: false });
   if (error) console.error("Error fetching invoices:", error);
   return data || [];
