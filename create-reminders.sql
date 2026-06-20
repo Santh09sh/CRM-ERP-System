@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS task_reminders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    channels TEXT[] NOT NULL DEFAULT '{}',
+    status TEXT NOT NULL DEFAULT 'sent',
+    sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE IF EXISTS task_reminders DISABLE ROW LEVEL SECURITY;
