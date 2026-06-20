@@ -50,6 +50,7 @@ import { StatCard } from "@/components/shared/stat-card";
 import { getLeads, getDeals, getTasks } from "@/lib/db";
 import { formatCurrency, formatRelativeDate, getInitials } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-provider";
+import { createClient } from "@/lib/supabase/client";
 
 // ─── Sample Data ──────────────────────────────────────────────
 
@@ -911,6 +912,31 @@ export default function DashboardPage() {
         const conversionRate = leads.length > 0 ? (wonLeads.length / leads.length) * 100 : 0;
         const pipelineValue = openDeals.reduce((sum: number, d: any) => sum + Number(d.value || 0), 0);
 
+        let refEarned = 0, refClicks = 0, refConversions = 0, refRate = 0;
+
+        if (role === "ambassador" && user?.id) {
+          if (user.id.startsWith("demo-")) {
+            refEarned = 8400;
+            refClicks = 47;
+            refConversions = 3;
+            refRate = (3 / 47) * 100;
+          } else {
+            const supabase = createClient();
+            const { data: rc } = await supabase
+              .from("referral_codes")
+              .select("total_clicks, total_conversions, total_earned")
+              .eq("ambassador_id", user.id)
+              .single();
+              
+            if (rc) {
+              refEarned = rc.total_earned || 0;
+              refClicks = rc.total_clicks || 0;
+              refConversions = rc.total_conversions || 0;
+              refRate = refClicks > 0 ? (refConversions / refClicks) * 100 : 0;
+            }
+          }
+        }
+
         setMetrics(prev => ({
           ...prev,
           total_leads: leads.length,
@@ -918,6 +944,10 @@ export default function DashboardPage() {
           pipeline_value: pipelineValue,
           tasks_due: pendingTasks.length,
           conversion_rate: parseFloat(conversionRate.toFixed(1)),
+          referral_earned: refEarned,
+          referral_clicks: refClicks,
+          referral_conversions: refConversions,
+          referral_rate: parseFloat(refRate.toFixed(1)),
         }));
 
       } catch (err: any) {
