@@ -1199,9 +1199,9 @@ export default function DashboardPage() {
                     {current && <div className="absolute -top-2.5 left-1/2 -translate-x-1/2"><div className="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider" style={{ background: t.color, color: "#000" }}>YOU</div></div>}
                     {current && <motion.div className="absolute inset-0 rounded-xl pointer-events-none" style={{ border: `1px solid ${t.color}` }} animate={{ opacity: [0.4,1,0.4] }} transition={{ repeat: Infinity, duration: 2 }} />}
                     <div className="text-2xl mb-2 mt-2">{t.emoji}</div>
-                    <p className="text-[9px] font-bold uppercase tracking-wider mb-1" style={{ color: unlocked ? t.color : "#1A1A1A" }}>{t.label}</p>
-                    <p className="text-sm font-black" style={{ color: unlocked ? "#fff" : "#111" }}>{(t.rate*100).toFixed(1)}%</p>
-                    <p className="text-[8px] mt-1" style={{ color: unlocked ? "#444" : "#111" }}>{t.min}+ refs</p>
+                    <p className="text-[9px] font-bold uppercase tracking-wider mb-1" style={{ color: unlocked ? t.color : "#555555" }}>{t.label}</p>
+                    <p className="text-sm font-black" style={{ color: unlocked ? "#fff" : "#666666" }}>{(t.rate*100).toFixed(1)}%</p>
+                    <p className="text-[8px] mt-1" style={{ color: unlocked ? "#444" : "#444444" }}>{t.min}+ refs</p>
                     {unlocked && !current && <motion.div className="absolute top-2 right-2" initial={{ scale: 0 }} animate={{ scale: 1 }}><Check className="w-3 h-3" style={{ color: t.color }} /></motion.div>}
                   </motion.div>
                 );
