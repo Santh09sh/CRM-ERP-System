@@ -1329,7 +1329,7 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Top Performing Ventures
             </h3>
-            <div className="space-y-4">
+            <div className="flex flex-col gap-6">
               {VENTURE_REVENUE.map((v, i) => {
                 const venture = VENTURES[v.key];
                 const maxRevenue = VENTURE_REVENUE[0].revenue;
@@ -1364,7 +1364,7 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Lead Distribution
             </h3>
-            <div className="space-y-4">
+            <div className="flex flex-col gap-6">
               {VENTURE_LEAD_DIST.map((v) => {
                 const venture = VENTURES[v.key];
                 return (
@@ -1450,7 +1450,7 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Recent Activity
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-col gap-5">
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
@@ -1484,7 +1484,7 @@ export default function DashboardPage() {
               <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
                 Top Referrers
               </h3>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-5">
                 {SAMPLE_LEADERBOARD.map((entry) => (
                   <div key={entry.rank} className="flex items-center gap-4">
                     <span
@@ -1532,7 +1532,7 @@ export default function DashboardPage() {
             >
               Recent Activity
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-col gap-5">
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
@@ -1573,7 +1573,7 @@ export default function DashboardPage() {
                 {metrics.tasks_due} pending
               </span>
             </div>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-3">
               {[
                 { title: "Follow up with IIT Hyderabad — placement pricing", priority: "high", venture: "skill_tank" as VentureKey },
                 { title: "Send campaign proposal to Zomato", priority: "urgent", venture: "maceco" as VentureKey },
@@ -1627,7 +1627,7 @@ export default function DashboardPage() {
               {metrics.tasks_due} pending
             </span>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-3">
             {[
               { title: "Follow up with IIT Hyderabad — placement pricing", priority: "high", assignee: "Priya Sharma", venture: "skill_tank" as VentureKey },
               { title: "Send campaign proposal to Zomato", priority: "urgent", assignee: "Arjun Mehta", venture: "maceco" as VentureKey },
