@@ -360,6 +360,14 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={async () => {
+                  let roleToAssign = "admin"; // Default
+                  if (email.includes("manager")) roleToAssign = "manager";
+                  else if (email.includes("ambassador")) roleToAssign = "ambassador";
+                  else if (email.includes("rep")) roleToAssign = "sales_rep";
+                  else if (email.includes("admin")) roleToAssign = "admin";
+                  
+                  document.cookie = `intended_role=${roleToAssign}; path=/; max-age=300`;
+
                   const supabase = createClient();
                   await supabase.auth.signInWithOAuth({
                     provider: "google",
