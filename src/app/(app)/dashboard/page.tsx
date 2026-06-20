@@ -1040,7 +1040,7 @@ export default function DashboardPage() {
 
       {/* CRM Stats — Admin, Manager, Sales Rep */}
       {(canViewLeads || canViewDeals) && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard
             label="Total Leads"
             value={metrics.total_leads}

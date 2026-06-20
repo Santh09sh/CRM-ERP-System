@@ -232,7 +232,7 @@ export default function PipelinePage() {
         </div>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCorners} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          <div className="flex gap-4 overflow-x-auto pb-6 -mx-2 px-2 relative">
+          <div className="flex gap-4 overflow-x-auto pb-6 -mx-2 px-2 relative snap-x snap-mandatory" style={{ WebkitOverflowScrolling: 'touch' }}>
             {stages.map((stage, i) => (
               <KanbanColumn
                 key={stage.id}
@@ -273,7 +273,7 @@ function KanbanColumn({
   return (
     <motion.div
       ref={setNodeRef}
-      className="flex-shrink-0 w-72"
+      className="flex-shrink-0 w-72 snap-start"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, type: "spring", stiffness: 120, damping: 20 }}

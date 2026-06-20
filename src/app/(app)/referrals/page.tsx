@@ -352,13 +352,13 @@ export default function ReferralsPage() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex border-b border-zinc-800" style={{ gap: "0.5rem", marginBottom: "3rem", marginTop: "2rem" }}>
+        <div className="flex overflow-x-auto whitespace-nowrap border-b border-zinc-800 no-scrollbar" style={{ gap: "0.5rem", marginBottom: "3rem", marginTop: "2rem" }}>
           {[{ id: "dashboard", label: "War Room", icon: Activity }, { id: "payouts", label: "Payouts", icon: DollarSign }, { id: "leaderboard", label: "Leaderboard", icon: Trophy }].map(t => (
             <button key={t.id} onClick={() => setTab(t.id as any)}
               style={{ marginBottom: "-1px" }}
-              className={cn("flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-all",
+              className={cn("flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-all flex-shrink-0",
                 tab === t.id ? "border-white text-white" : "border-transparent text-zinc-500 hover:text-zinc-300")}>
-              <t.icon className="w-4 h-4" />{t.label}
+              <t.icon className="w-4 h-4 flex-shrink-0" />{t.label}
             </button>
           ))}
         </div>

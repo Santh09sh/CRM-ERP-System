@@ -283,6 +283,9 @@ p {
 
 .table-container {
   overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
 }
 
 .data-table {
