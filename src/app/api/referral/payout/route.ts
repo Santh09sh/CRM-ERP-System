@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       .from("referral_codes")
       .select("total_earned")
       .eq("ambassador_id", resolvedId)
-      .single();
+      .maybeSingle();
 
     const { data: existingPayouts } = await supabase
       .from("payouts")

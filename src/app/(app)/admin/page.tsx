@@ -545,16 +545,16 @@ export default function AdminPage() {
       </div>
 
       {/* Tab Nav */}
-      <motion.div className="flex gap-1 mb-6 overflow-x-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
+      <motion.div className="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm whitespace-nowrap transition-colors ${
-              activeTab === tab.id ? "bg-[#F5F5F5] text-[#050505]" : "bg-[#111] text-[#666] hover:text-[#A3A3A3]"
+            className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              activeTab === tab.id ? "bg-[#F5F5F5] text-[#050505] shadow-sm" : "bg-[#111] text-[#666] border border-[#1A1A1A] hover:text-[#D4D4D4] hover:bg-[#151515]"
             }`}
           >
-            <tab.icon className="w-3.5 h-3.5" />
+            <tab.icon className="w-4 h-4" />
             {tab.label}
           </button>
         ))}
