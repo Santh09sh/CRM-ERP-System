@@ -1334,7 +1334,7 @@ export default function DashboardPage() {
                 const venture = VENTURES[v.key];
                 const maxRevenue = VENTURE_REVENUE[0].revenue;
                 return (
-                  <div key={v.key} className="py-4">
+                  <div key={v.key} style={{ padding: "16px 0" }}>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <span className="text-base font-semibold text-[#555] w-6" style={{ fontFamily: "var(--font-mono)" }}>{i + 1}</span>
@@ -1368,7 +1368,7 @@ export default function DashboardPage() {
               {VENTURE_LEAD_DIST.map((v) => {
                 const venture = VENTURES[v.key];
                 return (
-                  <div key={v.key} className="py-4">
+                  <div key={v.key} style={{ padding: "16px 0" }}>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <span className="text-base text-[#A3A3A3]">{venture.name}</span>
@@ -1454,7 +1454,7 @@ export default function DashboardPage() {
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
-                  <div key={activity.id} className="flex items-start gap-4 py-3">
+                  <div key={activity.id} className="flex items-start gap-4" style={{ padding: "12px 0" }}>
                     <div className="w-8 h-8 rounded-md bg-[#1A1A1A] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <IconComp className="w-4 h-4 text-[#666]" />
                     </div>
@@ -1486,7 +1486,7 @@ export default function DashboardPage() {
               </h3>
               <div className="flex flex-col">
                 {SAMPLE_LEADERBOARD.map((entry) => (
-                  <div key={entry.rank} className="flex items-center gap-4 py-3">
+                  <div key={entry.rank} className="flex items-center gap-4" style={{ padding: "12px 0" }}>
                     <span
                       className="text-xl font-bold text-[#444] w-8"
                       style={{ fontFamily: "var(--font-mono)" }}
@@ -1536,7 +1536,7 @@ export default function DashboardPage() {
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
-                  <div key={activity.id} className="flex items-start gap-3 py-3">
+                  <div key={activity.id} className="flex items-start gap-3" style={{ padding: "12px 0" }}>
                     <div className="w-7 h-7 rounded-md bg-[#1A1A1A] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <IconComp className="w-3.5 h-3.5 text-[#666]" />
                     </div>
@@ -1581,7 +1581,8 @@ export default function DashboardPage() {
               ].map((task, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors my-2"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors"
+                  style={{ margin: "12px 0" }}
                 >
                   <div
                     className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${
@@ -1636,7 +1637,8 @@ export default function DashboardPage() {
             ].map((task, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors my-2"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors"
+                style={{ margin: "12px 0" }}
               >
                 <div
                   className={`w-3 h-3 rounded-full flex-shrink-0 ${
