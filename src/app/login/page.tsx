@@ -64,6 +64,7 @@ export default function LoginPage() {
 
     try {
       const trimmedEmail = email.trim().toLowerCase();
+      const supabase = createClient();
 
       // Check if it's a demo account
       if (isDemoUser(trimmedEmail)) {
@@ -73,6 +74,8 @@ export default function LoginPage() {
         }
         const profile = getDemoProfile(trimmedEmail);
         if (profile) {
+          // Force sign out of any persistent Supabase session first!
+          await supabase.auth.signOut();
           createDemoSession(profile);
           toast.success(`Welcome, ${profile.full_name}`);
           router.push("/dashboard");
@@ -81,8 +84,8 @@ export default function LoginPage() {
         }
       }
 
-      // Otherwise, try Supabase
-      const supabase = createClient();
+      // Otherwise, try Supabase (production auth)
+      clearDemoSession(); // Force clear any stale demo session
       const { error } = await supabase.auth.signInWithPassword({
         email: trimmedEmail,
         password,
