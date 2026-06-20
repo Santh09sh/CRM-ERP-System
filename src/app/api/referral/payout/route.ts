@@ -109,3 +109,40 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const demo_name = searchParams.get("demo_name");
+    const user_id = searchParams.get("user_id");
+
+    const supabase = await createClient();
+    let resolvedId: string;
+
+    if (demo_name) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("full_name", demo_name)
+        .single();
+      if (!profile) return NextResponse.json([]);
+      resolvedId = profile.id;
+    } else if (user_id) {
+      resolvedId = user_id;
+    } else {
+      return NextResponse.json({ error: "Missing user_id or demo_name" }, { status: 400 });
+    }
+
+    const { data: payouts, error } = await supabase
+      .from("payouts")
+      .select("*")
+      .eq("ambassador_id", resolvedId)
+      .order("requested_at", { ascending: false });
+
+    if (error) throw error;
+    return NextResponse.json(payouts || []);
+  } catch (err: any) {
+    console.error("Payout fetch error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}

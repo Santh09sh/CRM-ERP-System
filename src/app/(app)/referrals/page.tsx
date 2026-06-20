@@ -144,7 +144,19 @@ export default function ReferralsPage() {
       const demo = makeDemoProfile(user.full_name, user.role);
       setProfile(demo);
       setConversions(user.role === "ambassador" ? DEMO_CONVERSIONS : []);
-      setPayouts([]);
+      
+      try {
+        const res = await fetch(`/api/referral/payout?demo_name=${encodeURIComponent(user.full_name || "Sneha Reddy")}`);
+        if (res.ok) {
+          const fetchedPayouts = await res.json();
+          setPayouts(fetchedPayouts);
+        } else {
+          setPayouts([]);
+        }
+      } catch {
+        setPayouts([]);
+      }
+
       setLeaderboard(DEMO_LEADERBOARD);
       setLoading(false);
       return;
