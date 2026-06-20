@@ -40,6 +40,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
   const router = useRouter();
 
   // ── Demo Role Selection ────────────────────────────────────
@@ -51,6 +52,7 @@ export default function LoginPage() {
     // Clear any existing demo session so stale cookies don't persist
     clearDemoSession();
 
+    setSelectedRole(role);
     setEmail(roleInfo.email);
     setPassword(DEMO_PASSWORD);
     setStep("manual");
@@ -360,13 +362,11 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={async () => {
-                  let roleToAssign = "admin"; // Default
-                  if (email.includes("manager")) roleToAssign = "manager";
-                  else if (email.includes("ambassador")) roleToAssign = "ambassador";
-                  else if (email.includes("rep")) roleToAssign = "sales_rep";
-                  else if (email.includes("admin")) roleToAssign = "admin";
-                  
-                  document.cookie = `intended_role=${roleToAssign}; path=/; max-age=300`;
+                  if (selectedRole) {
+                    document.cookie = `intended_role=${selectedRole}; path=/; max-age=300`;
+                  } else {
+                    document.cookie = `intended_role=; path=/; max-age=0`; // Clear if no role selected
+                  }
 
                   const supabase = createClient();
                   await supabase.auth.signInWithOAuth({
