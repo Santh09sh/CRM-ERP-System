@@ -1329,13 +1329,13 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Top Performing Ventures
             </h3>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col">
               {VENTURE_REVENUE.map((v, i) => {
                 const venture = VENTURES[v.key];
                 const maxRevenue = VENTURE_REVENUE[0].revenue;
                 return (
-                  <div key={v.key}>
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={v.key} className="py-4">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <span className="text-base font-semibold text-[#555] w-6" style={{ fontFamily: "var(--font-mono)" }}>{i + 1}</span>
                         <span className="text-base text-white font-medium">{venture.name}</span>
@@ -1364,12 +1364,12 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Lead Distribution
             </h3>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col">
               {VENTURE_LEAD_DIST.map((v) => {
                 const venture = VENTURES[v.key];
                 return (
-                  <div key={v.key}>
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={v.key} className="py-4">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <span className="text-base text-[#A3A3A3]">{venture.name}</span>
                       </div>
@@ -1450,11 +1450,11 @@ export default function DashboardPage() {
             <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
               Recent Activity
             </h3>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
-                  <div key={activity.id} className="flex items-start gap-4">
+                  <div key={activity.id} className="flex items-start gap-4 py-3">
                     <div className="w-8 h-8 rounded-md bg-[#1A1A1A] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <IconComp className="w-4 h-4 text-[#666]" />
                     </div>
@@ -1484,9 +1484,9 @@ export default function DashboardPage() {
               <h3 className="text-sm text-[#A3A3A3] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
                 Top Referrers
               </h3>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col">
                 {SAMPLE_LEADERBOARD.map((entry) => (
-                  <div key={entry.rank} className="flex items-center gap-4">
+                  <div key={entry.rank} className="flex items-center gap-4 py-3">
                     <span
                       className="text-xl font-bold text-[#444] w-8"
                       style={{ fontFamily: "var(--font-mono)" }}
@@ -1532,11 +1532,11 @@ export default function DashboardPage() {
             >
               Recent Activity
             </h3>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
               {SAMPLE_ACTIVITIES.map((activity) => {
                 const IconComp = activityIcons[activity.type] || FileText;
                 return (
-                  <div key={activity.id} className="flex items-start gap-3">
+                  <div key={activity.id} className="flex items-start gap-3 py-3">
                     <div className="w-7 h-7 rounded-md bg-[#1A1A1A] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <IconComp className="w-3.5 h-3.5 text-[#666]" />
                     </div>
@@ -1573,7 +1573,7 @@ export default function DashboardPage() {
                 {metrics.tasks_due} pending
               </span>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col">
               {[
                 { title: "Follow up with IIT Hyderabad — placement pricing", priority: "high", venture: "skill_tank" as VentureKey },
                 { title: "Send campaign proposal to Zomato", priority: "urgent", venture: "maceco" as VentureKey },
@@ -1581,7 +1581,7 @@ export default function DashboardPage() {
               ].map((task, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors my-2"
                 >
                   <div
                     className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${
@@ -1627,7 +1627,7 @@ export default function DashboardPage() {
               {metrics.tasks_due} pending
             </span>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col">
             {[
               { title: "Follow up with IIT Hyderabad — placement pricing", priority: "high", assignee: "Priya Sharma", venture: "skill_tank" as VentureKey },
               { title: "Send campaign proposal to Zomato", priority: "urgent", assignee: "Arjun Mehta", venture: "maceco" as VentureKey },
@@ -1636,7 +1636,7 @@ export default function DashboardPage() {
             ].map((task, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#1A1A1A] hover:border-[#333] transition-colors my-2"
               >
                 <div
                   className={`w-3 h-3 rounded-full flex-shrink-0 ${
