@@ -129,7 +129,18 @@ export function getDemoSession(): Profile | null {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
     if (!data) return null;
-    return JSON.parse(data) as Profile;
+    const profile = JSON.parse(data) as Profile;
+    
+    // Migrate old demo IDs to valid UUIDs to prevent foreign key errors
+    if (profile.id && profile.id.startsWith("demo-")) {
+      const freshProfile = getDemoProfile(profile.email);
+      if (freshProfile) {
+        createDemoSession(freshProfile);
+        return freshProfile;
+      }
+    }
+    
+    return profile;
   } catch {
     return null;
   }
@@ -153,8 +164,16 @@ export function parseDemoSessionCookie(cookieHeader: string): Profile | null {
 
     if (!match) return null;
 
-    const value = decodeURIComponent(match.substring(COOKIE_NAME.length + 1));
-    return JSON.parse(value) as Profile;
+    const value = match.substring(COOKIE_NAME.length + 1);
+    const profile = JSON.parse(decodeURIComponent(value)) as Profile;
+    
+    // Migrate old demo IDs for middleware
+    if (profile.id && profile.id.startsWith("demo-")) {
+      const freshProfile = getDemoProfile(profile.email);
+      if (freshProfile) return freshProfile;
+    }
+    
+    return profile;
   } catch {
     return null;
   }
