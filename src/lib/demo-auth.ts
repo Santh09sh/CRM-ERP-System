@@ -4,7 +4,7 @@ import type { Profile, UserRole } from "./types";
 
 export const DEMO_PROFILES: Record<string, Profile> = {
   "admin@saasum.in": {
-    id: "demo-admin-001",
+    id: "11111111-1111-1111-1111-111111111111",
     full_name: "Vishnu Reddy",
     email: "admin@saasum.in",
     role: "admin",
@@ -14,7 +14,7 @@ export const DEMO_PROFILES: Record<string, Profile> = {
     created_at: new Date().toISOString(),
   },
   "manager@saasum.in": {
-    id: "demo-manager-001",
+    id: "22222222-2222-2222-2222-222222222222",
     full_name: "Priya Sharma",
     email: "manager@saasum.in",
     role: "manager",
@@ -24,7 +24,7 @@ export const DEMO_PROFILES: Record<string, Profile> = {
     created_at: new Date().toISOString(),
   },
   "rep@saasum.in": {
-    id: "demo-rep-001",
+    id: "33333333-3333-3333-3333-333333333333",
     full_name: "Arjun Mehta",
     email: "rep@saasum.in",
     role: "sales_rep",
@@ -34,7 +34,7 @@ export const DEMO_PROFILES: Record<string, Profile> = {
     created_at: new Date().toISOString(),
   },
   "ambassador@saasum.in": {
-    id: "demo-ambassador-001",
+    id: "44444444-4444-4444-4444-444444444444",
     full_name: "Sneha Reddy",
     email: "ambassador@saasum.in",
     role: "ambassador",

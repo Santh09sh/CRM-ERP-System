@@ -21,6 +21,7 @@ import { getLeadById, getActivitiesForLead, createActivity, updateLead } from '@
 import { assignLead } from '@/lib/services/lead-service';
 import { VentureBadge } from '@/components/shared/venture-badge';
 import { analyzeLeadForNextAction } from "@/lib/ai-next-action";
+import { getDemoSession } from "@/lib/demo-auth";
 
 const activityIcons: Record<string, React.ElementType> = {
   call: Phone,
@@ -175,16 +176,23 @@ export default function LeadDetailPage() {
     e.preventDefault();
     try {
       const { data: { user } } = await createClient().auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+      const demoUser = getDemoSession();
+      const userId = user?.id || demoUser?.id;
+
+      if (!userId) throw new Error("Not authenticated");
       
       const newAct = await createActivity({
         lead_id: leadId,
         type: activityType,
         subject: activitySubject,
         description: activityDesc || null,
-        created_by: user.id,
+        created_by: userId,
         activity_date: new Date().toISOString()
       });
+      
+      if (!newAct.created_by_user && demoUser && demoUser.id === userId) {
+        newAct.created_by_user = demoUser;
+      }
       
       setActivities(prev => [newAct, ...prev]);
       setShowActivityForm(false);

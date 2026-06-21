@@ -333,6 +333,21 @@ export function analyzeLeadForNextAction(
   // Primary: stage-based actions
   const stageActions = STAGE_ACTIONS[stageName] || STAGE_ACTIONS["New"];
   for (const template of stageActions) {
+    // If they already did this type of outreach in this stage, don't recommend it again as the primary!
+    // Example: if template.icon is 📞 (call) and they already called, skip.
+    const isCallTemplate = template.icon === "📞" || template.action.toLowerCase().includes("call");
+    const isEmailTemplate = template.icon === "✉️" || template.action.toLowerCase().includes("email");
+    
+    // Check if we already did this action type recently
+    const hasCalled = activities.some(a => a.type === "call");
+    const hasEmailed = activities.some(a => a.type === "email");
+    
+    // For "New" stage, if we already called, don't recommend call again.
+    if (stageName === "New") {
+      if (isCallTemplate && hasCalled) continue;
+      if (isEmailTemplate && hasEmailed) continue;
+    }
+
     const urgency = getUrgency(daysSinceLastActivity, daysInStage, meta, lead.priority);
     const impact = getImpact(template.category, healthScore, daysInStage, meta);
     const timeToAct = getTimeToAct(urgency);
@@ -357,6 +372,19 @@ export function analyzeLeadForNextAction(
       estimated_impact: impact,
       time_to_act: timeToAct,
       script,
+    });
+  }
+
+  // If we filtered out all stage templates (because they did all of them), add a generic logical next step
+  if (nextActions.length === 0) {
+    nextActions.push({
+      action: `Move lead to the next pipeline stage`,
+      reason: `You have completed the key activities for the ${stageName} stage. It's time to advance the deal.`,
+      urgency: "medium",
+      icon: "➡️",
+      category: "qualify",
+      estimated_impact: 80,
+      time_to_act: "This week",
     });
   }
 
